@@ -12,4 +12,5 @@ class   TestIsUnique(unittest.TestCase):
 
     def test_is_unique_with_spaces(self):
         
+        
         self.assertEqual(is_unique("a b c"), False)
