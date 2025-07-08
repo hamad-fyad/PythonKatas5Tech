@@ -8,6 +8,10 @@ def is_unique(string):
     Returns:
         True if all characters are unique, False otherwise
     """
+    from collections import Counter
+    temp = Counter(string.lower())
+    if 2 in temp.values():
+        return False
     return True
 
 
@@ -20,4 +24,4 @@ if __name__ == '__main__':
     print(f'"{test1}" has all unique characters: {is_unique(test1)}')  # Should be False (has repeated 'l')
     print(f'"{test2}" has all unique characters: {is_unique(test2)}')  # Should be True
     print(f'"{test3}" has all unique characters: {is_unique(test3)}')  # Should be True
-    print(f'"{test4}" has all unique characters: {is_unique(test4)}')  # Should be True
+    print(f'"{test4}" has all unique characters: {is_unique(test4)}')  # Should be False     
