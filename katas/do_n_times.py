@@ -6,17 +6,22 @@ def do_n_times(func, n):
         func: the function to execute
         n: the number of times to execute the function
     """
-    pass
+    
+    return [func() for _ in range(n)]
+    
+    
 
 
 def say_hello():
     """A function that prints 'Hello!'."""
     print("Hello!")
+    return "Hello!"
 
 
 def print_message():
     """A function that prints 'Python is fun!'."""
     print("Python is fun!")
+    return "Python is fun!"
 
 
 if __name__ == '__main__':

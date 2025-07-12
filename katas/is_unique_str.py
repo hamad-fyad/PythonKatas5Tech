@@ -15,6 +15,7 @@ def is_unique(string):
     return True
 
 
+
 if __name__ == '__main__':
     test1 = "Hello"
     test2 = "World"
