@@ -24,7 +24,7 @@ if __name__ == '__main__':
     test3 = "Python"
     test4 = "Unique"
 
-    print(f'"{test1}" has all unique characters: {is_unique(test1)}')  # Should be False (has repeated 'l')
+    print(f'"{test1}" has all unique characters: {is_unique("aaa")}')  # Should be False (has repeated 'l')
     print(f'"{test2}" has all unique characters: {is_unique(test2)}')  # Should be True
     print(f'"{test3}" has all unique characters: {is_unique(test3)}')  # Should be True
     print(f'"{test4}" has all unique characters: {is_unique(test4)}')  # Should be False     
