@@ -6,7 +6,8 @@ def do_n_times(func, n):
         func: the function to execute
         n: the number of times to execute the function
     """
-    
+    for i in range(n):
+        func()
     return [func() for _ in range(n)]
     
     

@@ -8,11 +8,13 @@ def is_unique(string):
     Returns:
         True if all characters are unique, False otherwise
     """
-    from collections import Counter
-    temp = Counter(string.lower())
-    if 2 in temp.values():
-        return False
-    return True
+    # from collections import Counter
+    # temp = Counter(string.lower())
+    # if 2 in temp.values():
+    #     return False
+    # return True
+
+    return len(string) == len(set(string.lower()))
 
 
 
