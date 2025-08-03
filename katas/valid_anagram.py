@@ -10,7 +10,15 @@ def is_anagram(s1, s2):
 
     Returns:
         True if the strings are anagrams, False otherwise
+        TODO make the test for this function
     """
+    from collections import Counter
+    count1 = Counter(s1.lower())
+    count2 = Counter(s2.lower())
+    set1 = set(s1.lower())
+    set2 = set(s2.lower())
+    if  count1 == count2:
+        return True 
     return False
 
 

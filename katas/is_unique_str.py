@@ -8,7 +8,7 @@ def is_unique(string):
     Returns:
         True if all characters are unique, False otherwise
     """
-<<<<<<< HEAD
+
     # from collections import Counter
     # temp = Counter(string.lower())
     # if 2 in temp.values():
@@ -17,11 +17,6 @@ def is_unique(string):
 
     return len(string) == len(set(string.lower()))
 
-=======
-    
-    
-    return True
->>>>>>> 8ba878a992da4a9765868416a660e5da0f9fe598
 
 
 if __name__ == '__main__':

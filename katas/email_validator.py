@@ -21,6 +21,7 @@ def is_valid_email(email: str):
     Returns:
         True if the email is valid, False otherwise
     """
+    
     return False
 
 

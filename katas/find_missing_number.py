@@ -9,6 +9,7 @@ def find_missing_number(numbers):
     Returns:
         the missing number
     """
+    
     return 0
 
 

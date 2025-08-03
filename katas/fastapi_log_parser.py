@@ -1,33 +1,40 @@
 import re
 
-
 def parse_fastapi_log(log_line: str):
     """
-    Parses a single FastAPI request log entry into a structured dictionary.
-
-    Expected FastAPI log format:
-    INFO:     127.0.0.1:54321 - "GET /api/users HTTP/1.1" 200 OK
-    
-    The parsed log data should be returned as a dictionary:
-    {
-        "client_ip": "127.0.0.1",
-        "client_port": "54321", 
-        "http_method": "GET",
-        "endpoint": "/api/users",
-        "http_version": "1.1",
-        "status_code": "200",
-        "status_text": "OK"
-    }
-    
-    Hint: Use regex to extract each component
-    
-    Args:
-        log_line: A single FastAPI log line string
-        
-    Returns:
-        Dictionary with parsed log components, or empty dict if invalid format
+    Parses a single FastAPI request log entry into a structured dictionary, without regex.
     """
-    return {}
+    try:
+        # Remove the "INFO:" prefix
+        parts = log_line.split("INFO:")[1].strip()
+
+        # Split IP and port
+        address_part, rest = parts.split(" - ", 1)
+        client_ip, client_port = address_part.strip().split(":")
+
+        # Extract method, endpoint, HTTP version
+        request_part, status_part = rest.split('"')[1], rest.split('"')[2].strip()
+        http_method, endpoint, http_version = request_part.strip().split()
+
+        # Clean HTTP version
+        http_version = http_version.replace("HTTP/", "")
+
+        # Extract status code and status text
+        status_code, status_text = status_part.split(" ", 1)
+
+        return {
+            "client_ip": client_ip,
+            "client_port": client_port,
+            "http_method": http_method,
+            "endpoint": endpoint,
+            "http_version": http_version,
+            "status_code": status_code,
+            "status_text": status_text
+        }
+
+    except (ValueError, IndexError):
+        return {}  
+
 
 
 if __name__ == "__main__":
@@ -38,7 +45,7 @@ if __name__ == "__main__":
         'INFO:     203.0.113.25:12345 - "DELETE /api/orders/456 HTTP/1.1" 204 No Content',
         'INFO:     172.16.0.1:8080 - "GET /health HTTP/1.1" 500 Internal Server Error'
     ]
-    
+
     print("FastAPI Log Parsing Results:")
     for i, log_line in enumerate(test_logs, 1):
         parsed = parse_fastapi_log(log_line)

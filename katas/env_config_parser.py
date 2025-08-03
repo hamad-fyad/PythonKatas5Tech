@@ -34,7 +34,39 @@ def parse_env_config(env_string: str):
     Returns:
         Dictionary with parsed configuration values
     """
-    return {}
+    config = {}
+    for line in env_string.strip().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+
+        if "=" not in line:
+            continue  
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip()
+
+
+        if (value.startswith('"') and value.endswith('"')) or (value.startswith("'") and value.endswith("'")):
+            value = value[1:-1]
+
+
+        lowered = value.lower()
+        if lowered == "true":
+            value = True
+        elif lowered == "false":
+            value = False
+        else:
+
+            try:
+                value = int(value)
+            except ValueError:
+                pass  
+
+        config[key] = value
+
+    return config
 
 
 if __name__ == "__main__":
