@@ -21,8 +21,16 @@ def is_valid_email(email: str):
     Returns:
         True if the email is valid, False otherwise
     """
-    
-    return False
+    if not isinstance(email, str) or len(email) == 0: 
+        return False
+    # Regex pattern for validating email
+    pattern = r'^[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]{1,253}\.[a-zA-Z]{2,}$'
+    if re.match(pattern, email):
+        print("Email format is valid")
+        return True
+    else:
+        print("Email format is invalid")
+        return False
 
 
 if __name__ == "__main__":
