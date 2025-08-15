@@ -10,6 +10,13 @@ def two_sum(numbers, target):
         a list containing the indices of the two numbers that add up to target,
         or an empty list if no such pair exists
     """
+    num_to_index = {}
+    for index, number in enumerate(numbers):
+        complement = target - number
+        if complement in num_to_index:
+            return [num_to_index[complement], index]
+        num_to_index[number] = index
+    # If no pair found, return an empty list
     return []
 
 
