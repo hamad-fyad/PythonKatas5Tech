@@ -51,4 +51,4 @@ if __name__ == "__main__":
         parsed = parse_fastapi_log(log_line)
         print(f"\nLog {i}:")
         print(f"  Input: {log_line}")
-        print(f"  Parsed: {parsed}")
+        print(f"  Parsed: {parsed}\n")
