@@ -15,8 +15,7 @@ def is_unique(string):
     #     return False
     # return True
 
-    string_lower = string.lower()
-    return len(string_lower) == len(set(string_lower))
+    return len(string) == len(set(string.lower()))
 
 
 
