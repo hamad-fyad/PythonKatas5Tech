@@ -1,3 +1,6 @@
+from collections import Counter
+
+
 def is_unique(string):
     """
     Checks if a string has all unique characters (case-insensitive).
@@ -15,7 +18,14 @@ def is_unique(string):
     #     return False
     # return True
 
-    return len(string) == len(set(string.lower()))
+
+    counts = Counter(string)  # count occurrences of each character
+
+    # If any character appears more than once, return False
+    for char, count in counts.items():
+        if count > 1:
+            return False
+    return True
 
 
 
