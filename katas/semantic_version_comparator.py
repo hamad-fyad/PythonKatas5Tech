@@ -2,6 +2,7 @@ def compare_versions(version1, version2):
     """
     Compares two semantic version strings to determine their relative order.
 
+    
     Semantic versioning follows the format "MAJOR.MINOR.PATCH" where:
     - MAJOR version increments for incompatible API changes
     - MINOR version increments for backward-compatible functionality
@@ -18,6 +19,17 @@ def compare_versions(version1, version2):
          0 if version1 = version2
          1 if version1 > version2
     """
+    ver1 = [int(x) for x in version1.split(".")]
+    ver2 = [int(x) for x in version2.split(".")]
+
+    max_len = max(len(ver1), len(ver2))
+    for i in range(max_len):
+        v1 = ver1[i] if i < len(ver1) else 0
+        v2 = ver2[i] if i < len(ver2) else 0
+        if v1 > v2:
+            return 1
+        elif v1 < v2:
+            return -1
     return 0
 
 

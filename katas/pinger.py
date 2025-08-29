@@ -6,6 +6,8 @@ import time
 
 
 
+#
+
 def ping_host(hostname: str, count: int = 5):
     """
     Pings a host and returns connection statistics.
@@ -23,7 +25,16 @@ def ping_host(hostname: str, count: int = 5):
     # TODO: Use subprocess.run() to execute ping command
     # Linux/Mac: ping -c {count} {hostname}
     # Parse output to extract the average latency in milliseconds
-    pass
+    string = subprocess.run(["ping","-c",str(count),hostname], capture_output=True, text=True)
+    ping_result = string.__dict__["stdout"] 
+    avg_time = float(ping_result.split("=")[-1].split("/")[1])
+    print("Average time:", avg_time, "ms")  
+
+    return {
+        'host': hostname,
+        'avg_response_time_ms': avg_time,  # Placeholder value
+        'success': True if string.returncode == 0 else False             # Placeholder value
+    }
 
 
 

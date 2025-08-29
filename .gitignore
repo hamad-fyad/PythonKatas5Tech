@@ -147,3 +147,5 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 >>>>>>> 8ba878a992da4a9765868416a660e5da0f9fe598
+.DS_Store
+.env

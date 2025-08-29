@@ -1,6 +1,6 @@
 class IP:
     """
-    Represents an IPv4 address.
+    Represents an IPv4 address. s
     """
 
     def __init__(self, address: str):
@@ -13,6 +13,7 @@ class IP:
         Raises:
             ValueError: If the address is invalid.
         """
+        address = address.strip()
         if not self._is_valid_ip(address):
             raise ValueError(f"Invalid IP address: {address}")
         self.address = address
@@ -27,7 +28,17 @@ class IP:
         Returns:
             True if valid, False otherwise.
         """
-        raise NotImplementedError("Validation logic not implemented.")
+        parts = address.split(".")
+        if len(parts) != 4:
+            return False
+        for part in parts:
+            if not part.isdigit():
+                return False
+            num = int(part)
+            if num < 0 or num > 255:
+                return False
+        return True
+        
 
     def __str__(self):
         return self.address
@@ -51,7 +62,8 @@ class RoundRobinLoadBalancer:
         """
         Initializes the load balancer with an empty pool of servers.
         """
-        raise NotImplementedError("Constructor not implemented.")
+        self.servers = []
+        self.server_index = 0 
 
     def add_server(self, server: IP):
         """
@@ -60,7 +72,7 @@ class RoundRobinLoadBalancer:
         Args:
             server: An IP instance representing the server to add.
         """
-        raise NotImplementedError("add_server not implemented.")
+        self.servers.append(server)
 
     def remove_server(self, server: IP):
         """
@@ -69,7 +81,7 @@ class RoundRobinLoadBalancer:
         Args:
             server: An IP instance representing the server to remove.
         """
-        raise NotImplementedError("remove_server not implemented.")
+        self.servers.remove(server)
 
     def route_request(self) -> IP | None:
         """
@@ -78,7 +90,15 @@ class RoundRobinLoadBalancer:
         Returns:
             The IP instance of the server handling the request, or None if no servers are available.
         """
-        raise NotImplementedError("route_request not implemented.")
+    
+        servers_length = len(self.servers)
+        if servers_length == 0 : 
+            return None
+        server = self.servers[self.server_index]
+        self.server_index = (self.server_index + 1) % servers_length
+        return server
+        
+
 
 
 if __name__ == '__main__':
