@@ -44,13 +44,18 @@ jobs:
       fail-fast: false
       matrix:
         kata_name: ${{ fromJson(needs.PreTestListKatas.outputs.tests) }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: unittest run
-        run: |
-          export PYTHONPATH=$PYTHONPATH:$(pwd)/katas
-          filename=${{ matrix.kata_name }}
-          python -m unittest katas.test.test_${filename%.py}
+      steps:
+        - uses: actions/checkout@v4
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install psutil
+        - name: unittest run
+          run: |
+            export PYTHONPATH=$PYTHONPATH:$(pwd)/katas
+            filename=${{ matrix.kata_name }}
+            python -m unittest katas.test.test_${filename%.py}
+
 
   PostTestStoreTestId:
     needs: Test
