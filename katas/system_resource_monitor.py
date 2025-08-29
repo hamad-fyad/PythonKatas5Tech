@@ -1,8 +1,4 @@
-try:
-    import psutil
-except ImportError:
-    psutil = None
-
+import psutil
 import subprocess
 import os
 from typing import Dict, List, Optional
@@ -14,8 +10,6 @@ from datetime import datetime
 
     
 def get_cpu_usage():
-    if psutil is None:
-        raise ImportError("psutil is required for get_cpu_usage")
     """
     Gets current CPU usage information.
     
@@ -35,8 +29,6 @@ def get_cpu_usage():
 
 
 def get_memory_usage():
-    if psutil is None:
-        raise ImportError("psutil is required for get_cpu_usage")
     """
     Gets current memory usage information.
     
@@ -56,8 +48,6 @@ def get_memory_usage():
 
 
 def get_disk_usage(path: str = "/") -> Dict:
-    if psutil is None:
-        raise ImportError("psutil is required for get_cpu_usage")
     """
     Gets disk usage for specified path.
     
